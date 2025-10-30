@@ -1,4 +1,4 @@
-package io.redskap.swagger.brake.gradle
+package com.docktape.swagger.brake.gradle
 
 import org.gradle.testkit.runner.GradleRunner
 import spock.lang.Specification
@@ -30,10 +30,10 @@ class SwaggerBrakePluginFunctionalTest extends Specification {
         buildFile << """
             plugins {
                 id 'java'
-                id 'io.redskap.swagger-brake'
+                id 'com.docktape.swagger-brake'
             }
 
-            group = 'io.redskap'
+            group = 'com.docktape'
             version = '2.0.0-SNAPSHOT' 
 
             swaggerBrake {
@@ -60,10 +60,10 @@ class SwaggerBrakePluginFunctionalTest extends Specification {
         buildFile << """
             plugins {
                 id 'java'
-                id 'io.redskap.swagger-brake'
+                id 'com.docktape.swagger-brake'
             }
 
-            group = 'io.redskap'
+            group = 'com.docktape'
             version = '2.0.0-SNAPSHOT' 
 
             swaggerBrake {
@@ -91,10 +91,10 @@ class SwaggerBrakePluginFunctionalTest extends Specification {
         buildFile << """
             plugins {
                 id 'java'
-                id 'io.redskap.swagger-brake'
+                id 'com.docktape.swagger-brake'
             }
 
-            group = 'io.redskap'
+            group = 'com.docktape'
             version = '2.0.0-SNAPSHOT' 
 
             swaggerBrake {
@@ -122,10 +122,10 @@ class SwaggerBrakePluginFunctionalTest extends Specification {
         buildFile << """
             plugins {
                 id 'java'
-                id 'io.redskap.swagger-brake'
+                id 'com.docktape.swagger-brake'
             }
 
-            group = 'io.redskap'
+            group = 'com.docktape'
             version = '2.0.0-SNAPSHOT' 
 
             swaggerBrake {

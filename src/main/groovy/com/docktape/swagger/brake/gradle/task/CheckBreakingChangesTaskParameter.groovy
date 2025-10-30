@@ -1,4 +1,4 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
 class CheckBreakingChangesTaskParameter {
     String newApi

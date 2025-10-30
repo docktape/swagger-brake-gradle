@@ -2,28 +2,29 @@ plugins {
     id 'groovy-gradle-plugin'
     id 'com.gradle.plugin-publish' version '1.1.0'
     id 'signing'
+    id 'org.jreleaser' version '1.20.0'
 }
 
-group 'io.redskap'
-version '2.5.0-SNAPSHOT'
+group 'com.docktape'
+version '2.6.0-SNAPSHOT'
 
 
 tasks.withType(JavaCompile).configureEach {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 gradlePlugin {
-    website = 'http://redskap.io'
-    vcsUrl = 'https://github.com/redskap/swagger-brake-gradle'
+    website = 'https://docktape.com'
+    vcsUrl = 'https://github.com/docktape/swagger-brake-gradle'
 
     plugins {
         swaggerBrake {
-            id = 'io.redskap.swagger-brake'
+            id = 'com.docktape.swagger-brake'
             displayName = "Swagger Brake Gradle plugin"
             description = 'A plugin to check Swagger definition files for any breaking API changes'
             tags.addAll('swagger', 'api', 'breaking-change', 'REST')
-            implementationClass = 'io.redskap.swagger.brake.gradle.SwaggerBrakePlugin'
+            implementationClass = 'com.docktape.swagger.brake.gradle.SwaggerBrakePlugin'
         }
     }
 }
@@ -37,15 +38,15 @@ repositories {
 }
 
 dependencies {
-    implementation "io.redskap:swagger-brake:2.5.0-SNAPSHOT"
+    implementation "com.docktape:swagger-brake:2.6.0"
     implementation "org.apache.commons:commons-collections4:4.4"
     implementation "org.apache.commons:commons-lang3:3.13.0"
     implementation 'com.google.guava:guava:32.1.2-jre'
 
     testImplementation "net.bytebuddy:byte-buddy:1.9.12"
     testImplementation "org.objenesis:objenesis:3.0.1"
-    testImplementation ("org.spockframework:spock-core:2.3-groovy-3.0") {
-        exclude group:'org.codehaus.groovy'
+    testImplementation("org.spockframework:spock-core:2.3-groovy-3.0") {
+        exclude group: 'org.codehaus.groovy'
     }
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
@@ -60,16 +61,42 @@ def isReleaseBuild() {
     return version.contains("SNAPSHOT") == false
 }
 
-if (project.hasProperty('ossrhUsername') && project.hasProperty('ossrhPassword')) {
+if (!isReleaseBuild()) {
     publishing {
         repositories {
             maven {
-                url = isReleaseBuild() ? 'https://oss.sonatype.org/service/local/staging/deploy/maven2/' : 'https://oss.sonatype.org/content/repositories/snapshots/'
+                url = 'https://central.sonatype.com/repository/maven-snapshots/'
 
                 credentials {
                     username = ossrhUsername
                     password = ossrhPassword
                 }
+            }
+        }
+    }
+}
+
+jreleaser {
+    project {
+        name = 'swagger-brake-gradle'
+        description = 'Swagger contract checker for breaking API changes'
+        website = 'https://github.com/docktape/swagger-brake-gradle'
+        authors = ['Arnold Galovics']
+        license = 'Apache-2.0'
+        inceptionYear = '2018'
+
+        links {
+            homepage = 'https://github.com/docktape/swagger-brake-gradle'
+        }
+    }
+
+    release {
+        github {
+            repoOwner = 'docktape'
+            name = 'swagger-brake-gradle'
+            overwrite = true
+            changelog {
+                formatted = 'ALWAYS'
             }
         }
     }

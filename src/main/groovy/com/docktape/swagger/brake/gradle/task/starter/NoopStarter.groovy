@@ -1,7 +1,7 @@
-package io.redskap.swagger.brake.gradle.task.starter
+package com.docktape.swagger.brake.gradle.task.starter
 
-import io.redskap.swagger.brake.core.BreakingChange
-import io.redskap.swagger.brake.runner.Options
+import com.docktape.swagger.brake.core.BreakingChange
+import com.docktape.swagger.brake.runner.Options
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 

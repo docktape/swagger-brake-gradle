@@ -1,9 +1,9 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
 
-import io.redskap.swagger.brake.gradle.task.starter.StarterFactory
-import io.redskap.swagger.brake.runner.Options
-import io.redskap.swagger.brake.runner.exception.LatestArtifactDownloadException
+import com.docktape.swagger.brake.gradle.task.starter.StarterFactory
+import com.docktape.swagger.brake.runner.Options
+import com.docktape.swagger.brake.runner.exception.LatestArtifactDownloadException
 import org.gradle.api.logging.Logger
 import org.gradle.api.logging.Logging
 

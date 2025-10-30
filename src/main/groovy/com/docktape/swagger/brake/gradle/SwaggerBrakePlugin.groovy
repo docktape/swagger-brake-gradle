@@ -1,7 +1,7 @@
-package io.redskap.swagger.brake.gradle
+package com.docktape.swagger.brake.gradle
 
 
-import io.redskap.swagger.brake.gradle.task.CheckBreakingChangesTask
+import com.docktape.swagger.brake.gradle.task.CheckBreakingChangesTask
 import org.gradle.api.Action
 import org.gradle.api.GradleException
 import org.gradle.api.Plugin

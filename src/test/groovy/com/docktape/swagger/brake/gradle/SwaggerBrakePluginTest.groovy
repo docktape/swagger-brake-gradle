@@ -1,4 +1,4 @@
-package io.redskap.swagger.brake.gradle
+package com.docktape.swagger.brake.gradle
 
 
 import org.gradle.api.GradleException

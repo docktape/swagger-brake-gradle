@@ -1,10 +1,10 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
 import com.google.common.collect.ImmutableSet
 import com.google.common.collect.Sets
-import io.redskap.swagger.brake.runner.ArtifactPackaging
-import io.redskap.swagger.brake.runner.Options
-import io.redskap.swagger.brake.runner.OutputFormat
+import com.docktape.swagger.brake.runner.ArtifactPackaging
+import com.docktape.swagger.brake.runner.Options
+import com.docktape.swagger.brake.runner.OutputFormat
 import org.apache.commons.collections4.CollectionUtils
 import org.apache.commons.lang3.StringUtils
 

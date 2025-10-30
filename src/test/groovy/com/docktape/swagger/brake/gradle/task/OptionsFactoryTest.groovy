@@ -1,7 +1,7 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
 import com.google.common.collect.Lists
-import io.redskap.swagger.brake.runner.ArtifactPackaging
+import com.docktape.swagger.brake.runner.ArtifactPackaging
 import spock.lang.Specification
 
 class OptionsFactoryTest extends Specification {

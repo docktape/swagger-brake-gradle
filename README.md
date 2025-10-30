@@ -1,7 +1,7 @@
-# Swagger Brake Gradle plugin [![Build Status](https://travis-ci.com/redskap/swagger-brake-gradle.svg?branch=master)](https://travis-ci.com/redskap/swagger-brake-gradle)
-Gradle plugin for [Swagger Brake](https://github.com/redskap/swagger-brake).
+# Swagger Brake Gradle plugin
+Gradle plugin for [Swagger Brake](https://github.com/docktape/swagger-brake).
 
-The plugin documentation can be found [here](https://redskap.github.io/swagger-brake/gradle/).
+The plugin documentation can be found [here](https://docktape.github.io/swagger-brake/gradle/).
 
 ## License
 ```text
@@ -17,3 +17,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
+
+## Publishing
+For snapshot:
+`./gradlew clean publish`
+
+For release:
+`./gradlew clean publishPlugins jreleaserFullRelease`

@@ -1,7 +1,7 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
-import io.redskap.swagger.brake.gradle.task.starter.StarterFactory
-import io.redskap.swagger.brake.runner.OptionsValidator
+import com.docktape.swagger.brake.gradle.task.starter.StarterFactory
+import com.docktape.swagger.brake.runner.OptionsValidator
 import org.gradle.api.DefaultTask
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property

@@ -1,4 +1,4 @@
-package io.redskap.swagger.brake.gradle.task.starter
+package com.docktape.swagger.brake.gradle.task.starter
 
 class StarterFactory {
     private final Class<? extends Starter> starterClass

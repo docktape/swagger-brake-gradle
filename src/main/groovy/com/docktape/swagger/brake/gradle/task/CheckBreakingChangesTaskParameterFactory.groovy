@@ -1,7 +1,7 @@
-package io.redskap.swagger.brake.gradle.task
+package com.docktape.swagger.brake.gradle.task
 
-import io.redskap.swagger.brake.runner.ArtifactPackaging
-import io.redskap.swagger.brake.runner.OutputFormat
+import com.docktape.swagger.brake.runner.ArtifactPackaging
+import com.docktape.swagger.brake.runner.OutputFormat
 import org.apache.commons.collections4.CollectionUtils
 import org.gradle.api.Project
 import org.gradle.api.logging.Logger

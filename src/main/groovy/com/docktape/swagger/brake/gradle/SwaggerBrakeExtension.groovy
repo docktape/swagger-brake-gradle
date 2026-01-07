@@ -27,6 +27,8 @@ class SwaggerBrakeExtension {
     final Property<String> apiFilename
     final ListProperty<String> excludedPaths
     final ListProperty<String> ignoredBreakingChangeRules
+    final Property<Boolean> strictValidation
+    final Property<Integer> maxLogSerializationDepth
 
     final Property<Boolean> testModeEnabled
 
@@ -48,6 +50,8 @@ class SwaggerBrakeExtension {
         this.apiFilename = project.getObjects().property(String.class)
         this.excludedPaths = project.getObjects().listProperty(String.class)
         this.ignoredBreakingChangeRules = project.getObjects().listProperty(String.class)
+        this.strictValidation = project.getObjects().property(Boolean.class)
+        this.maxLogSerializationDepth = project.getObjects().property(Integer.class)
         this.testModeEnabled = project.getObjects().property(Boolean.class)
     }
 }

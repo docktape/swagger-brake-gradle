@@ -60,6 +60,12 @@ class CheckBreakingChangesTask extends DefaultTask {
     @Input
     @Optional
     final ListProperty<String> ignoredBreakingChangeRules = getProject().getObjects().listProperty(String.class)
+    @Input
+    @Optional
+    final Property<Boolean> strictValidation = getProject().getObjects().property(Boolean.class)
+    @Input
+    @Optional
+    final Property<Integer> maxLogSerializationDepth = getProject().getObjects().property(Integer.class)
 
     @Input
     @Optional
@@ -87,7 +93,9 @@ class CheckBreakingChangesTask extends DefaultTask {
                 this.betaApiExtensionName,
                 this.apiFilename,
                 this.excludedPaths,
-                this.ignoredBreakingChangeRules
+                this.ignoredBreakingChangeRules,
+                this.strictValidation,
+                this.maxLogSerializationDepth
         )
         logger.info("The following parameters are set for the task {}", parameter)
         def options = OptionsFactory.create(parameter)

@@ -37,6 +37,8 @@ class OptionsFactoryTest extends Specification {
         assert result.deprecatedApiDeletionAllowed == parameter.deprecatedApiDeletionAllowed
         assert result.excludedPaths.sort() == parameter.excludedPaths.sort()
         assert result.ignoredBreakingChangeRules.sort() == parameter.ignoredBreakingChangeRules.sort()
+        assert result.strictValidation == null
+        assert result.maxLogSerializationDepth == null
     }
 
     def "OutputFormat is accepted when it's a lowercase value"() {

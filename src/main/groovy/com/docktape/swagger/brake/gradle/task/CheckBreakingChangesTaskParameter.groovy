@@ -18,6 +18,8 @@ class CheckBreakingChangesTaskParameter {
     String apiFilename
     List<String> excludedPaths
     List<String> ignoredBreakingChangeRules
+    Boolean strictValidation
+    Integer maxLogSerializationDepth
 
 
     @Override
@@ -40,6 +42,8 @@ class CheckBreakingChangesTaskParameter {
                 ", apiFilename='" + apiFilename + '\'' +
                 ", excludedPaths=" + excludedPaths + '\'' +
                 ", ignoredBreakingChangeRules=" + ignoredBreakingChangeRules + '\'' +
+                ", strictValidation=" + strictValidation + '\'' +
+                ", maxLogSerializationDepth=" + maxLogSerializationDepth + '\'' +
                 '}';
     }
 }

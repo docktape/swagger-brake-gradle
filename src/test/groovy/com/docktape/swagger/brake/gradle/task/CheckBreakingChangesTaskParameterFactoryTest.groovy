@@ -31,6 +31,8 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
     private Property<String> apiFilename = Mock(Property)
     private ListProperty<String> excludedPaths = Mock(ListProperty)
     private ListProperty<String> ignoredBreakingChangeRules = Mock(ListProperty)
+    private Property<Boolean> strictValidation = Mock(Property)
+    private Property<Integer> maxLogSerializationDepth = Mock(Property)
 
     private CheckBreakingChangesTaskParameterFactory underTest = new CheckBreakingChangesTaskParameterFactory()
 
@@ -53,6 +55,8 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
         def apiFilenameVal = "apiFilename"
         def excludedPathsVal = Lists.newArrayList("/path")
         def ignoredBreakingChangeRulesVal = Lists.newArrayList("R002")
+        def strictValidationVal = true
+        def maxLogSerializationDepthVal = 3
 
         and:
         newApi.get() >> newApiVal
@@ -72,6 +76,8 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
         apiFilename.getOrElse(null) >> apiFilenameVal
         excludedPaths.getOrElse(emptyList()) >> excludedPathsVal
         ignoredBreakingChangeRules.getOrElse(emptyList()) >> ignoredBreakingChangeRulesVal
+        strictValidation.getOrElse(null) >> strictValidationVal
+        maxLogSerializationDepth.getOrElse(null) >> maxLogSerializationDepthVal
         project.getPlugins() >> pluginContainer
         pluginContainer.hasPlugin("war") >> false
 
@@ -95,7 +101,9 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
                 betaApiExtensionName,
                 apiFilename,
                 excludedPaths,
-                ignoredBreakingChangeRules
+                ignoredBreakingChangeRules,
+                strictValidation,
+                maxLogSerializationDepth
         )
         
         then:
@@ -116,6 +124,8 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
         assert result.apiFilename == apiFilenameVal
         assert result.excludedPaths == excludedPathsVal
         assert result.ignoredBreakingChangeRules == ignoredBreakingChangeRulesVal
+        assert result.strictValidation == strictValidationVal
+        assert result.maxLogSerializationDepth == maxLogSerializationDepthVal
     }
 
 
@@ -142,6 +152,8 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
         deprecatedApiDeletionAllowed.getOrElse(false) >> deprecatedApiDeletionAllowedVal
         excludedPaths.getOrElse(emptyList()) >> emptyList()
         ignoredBreakingChangeRules.getOrElse(emptyList()) >> emptyList()
+        strictValidation.getOrElse(null) >> null
+        maxLogSerializationDepth.getOrElse(null) >> null
         project.getBuildDir() >> buildDir
         project.getGroup() >> groupIdVal
         project.getName() >> artifactIdVal
@@ -169,7 +181,9 @@ class CheckBreakingChangesTaskParameterFactoryTest extends Specification {
                 betaApiExtensionName,
                 apiFilename,
                 excludedPaths,
-                ignoredBreakingChangeRules
+                ignoredBreakingChangeRules,
+                strictValidation,
+                maxLogSerializationDepth
         )
 
         then:

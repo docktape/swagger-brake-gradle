@@ -33,7 +33,9 @@ class CheckBreakingChangesTaskParameterFactory {
             Property<String> betaApiExtensionName,
             Property<String> apiFilename,
             ListProperty<String> excludedPaths,
-            ListProperty<String> ignoredBreakingChangeRules
+            ListProperty<String> ignoredBreakingChangeRules,
+            Property<Boolean> strictValidation,
+            Property<Integer> maxLogSerializationDepth
     ) {
         def parameter = new CheckBreakingChangesTaskParameter()
         parameter.newApi = newApi.get()
@@ -53,6 +55,8 @@ class CheckBreakingChangesTaskParameterFactory {
         parameter.apiFilename = apiFilename.getOrElse(null)
         parameter.excludedPaths = excludedPaths.getOrElse(emptyList())
         parameter.ignoredBreakingChangeRules = ignoredBreakingChangeRules.getOrElse(emptyList())
+        parameter.strictValidation = strictValidation.getOrElse(null)
+        parameter.maxLogSerializationDepth = maxLogSerializationDepth.getOrElse(null)
         return parameter
     }
 

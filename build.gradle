@@ -72,8 +72,8 @@ if (!isReleaseBuild()) {
                 url = 'https://central.sonatype.com/repository/maven-snapshots/'
 
                 credentials {
-                    username = ossrhUsername
-                    password = ossrhPassword
+                    username = findProperty('ossrhUsername')
+                    password = findProperty('ossrhPassword')
                 }
             }
         }

@@ -19,6 +19,9 @@ class SwaggerBrakePluginFunctionalTest extends Specification {
     def setup() {
         buildFile = new File(testProjectDir, 'build.gradle')
         settingsFile = new File(testProjectDir, 'settings.gradle')
+        def swaggerDir = new File(testProjectDir, 'resources/main')
+        swaggerDir.mkdirs()
+        new File(swaggerDir, 'swagger.yaml') << 'openapi: "3.0.0"\ninfo:\n  title: Test\n  version: 1.0.0\npaths: {}\n'
     }
 
     def "checkBreakingChanges task works"() {

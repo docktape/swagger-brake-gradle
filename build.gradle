@@ -50,6 +50,7 @@ dependencies {
         exclude group: 'org.codehaus.groovy'
     }
     testImplementation gradleTestKit()
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {

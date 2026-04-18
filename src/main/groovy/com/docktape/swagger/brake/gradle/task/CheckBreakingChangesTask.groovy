@@ -5,10 +5,12 @@ import com.docktape.swagger.brake.runner.OptionsValidator
 import org.gradle.api.DefaultTask
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
+import org.gradle.work.DisableCachingByDefault
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
+@DisableCachingByDefault(because = "API compatibility checks depend on external files and should not be cached")
 class CheckBreakingChangesTask extends DefaultTask {
     @Input
     final Property<String> newApi = getProject().getObjects().property(String.class)

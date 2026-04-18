@@ -3,80 +3,108 @@ package com.docktape.swagger.brake.gradle.task
 import com.docktape.swagger.brake.gradle.task.starter.StarterFactory
 import com.docktape.swagger.brake.runner.OptionsValidator
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
-import org.gradle.work.DisableCachingByDefault
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 
-@DisableCachingByDefault(because = "API compatibility checks depend on external files and should not be cached")
+@CacheableTask
 class CheckBreakingChangesTask extends DefaultTask {
-    @Input
-    final Property<String> newApi = getProject().getObjects().property(String.class)
-    @Input
-    @Optional
-    final Property<String> oldApi = getProject().getObjects().property(String.class)
-    @Input
-    @Optional
-    final Property<String> mavenRepoUrl = getProject().getObjects().property(String.class)
+    @Internal
+    final Property<String> newApi = project.objects.property(String)
+    @Internal
+    final Property<String> oldApi = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> mavenSnapshotRepoUrl = getProject().getObjects().property(String.class)
+    final Property<String> mavenRepoUrl = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> artifactId = getProject().getObjects().property(String.class)
+    final Property<String> mavenSnapshotRepoUrl = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> groupId = getProject().getObjects().property(String.class)
+    final Property<String> artifactId = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> currentVersion = getProject().getObjects().property(String.class)
+    final Property<String> groupId = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> artifactPackaging = getProject().getObjects().property(String.class)
+    final Property<String> currentVersion = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> outputFilePath = getProject().getObjects().property(String.class)
+    final Property<String> artifactPackaging = project.objects.property(String)
+    @Internal
+    final Property<String> outputFilePath = project.objects.property(String)
     @Input
     @Optional
-    final ListProperty<String> outputFormats = getProject().getObjects().listProperty(String.class)
+    final ListProperty<String> outputFormats = project.objects.listProperty(String)
     @Input
     @Optional
-    final Property<String> mavenRepoUsername = getProject().getObjects().property(String.class)
+    final Property<String> mavenRepoUsername = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> mavenRepoPassword = getProject().getObjects().property(String.class)
+    final Property<String> mavenRepoPassword = project.objects.property(String)
     @Input
     @Optional
-    final Property<Boolean> deprecatedApiDeletionAllowed = getProject().getObjects().property(Boolean.class)
+    final Property<Boolean> deprecatedApiDeletionAllowed = project.objects.property(Boolean)
     @Input
     @Optional
-    final Property<String> betaApiExtensionName = getProject().getObjects().property(String.class)
+    final Property<String> betaApiExtensionName = project.objects.property(String)
     @Input
     @Optional
-    final Property<String> apiFilename = getProject().getObjects().property(String.class)
+    final Property<String> apiFilename = project.objects.property(String)
     @Input
     @Optional
-    final ListProperty<String> excludedPaths = getProject().getObjects().listProperty(String.class)
+    final ListProperty<String> excludedPaths = project.objects.listProperty(String)
     @Input
     @Optional
-    final ListProperty<String> ignoredBreakingChangeRules = getProject().getObjects().listProperty(String.class)
+    final ListProperty<String> ignoredBreakingChangeRules = project.objects.listProperty(String)
     @Input
     @Optional
-    final Property<Boolean> strictValidation = getProject().getObjects().property(Boolean.class)
+    final Property<Boolean> strictValidation = project.objects.property(Boolean)
     @Input
     @Optional
-    final Property<Integer> maxLogSerializationDepth = getProject().getObjects().property(Integer.class)
+    final Property<Integer> maxLogSerializationDepth = project.objects.property(Integer)
 
-    @Input
+    @Internal
+    final Property<Boolean> testModeEnabled = project.objects.property(Boolean)
+
+    @OutputDirectory
+    final DirectoryProperty outputDir = project.objects.directoryProperty()
+        .convention(
+            project.layout.dir(
+                outputFilePath.map { path -> project.file(path) }
+            ).orElse(project.layout.buildDirectory.dir("swagger-brake"))
+        )
+
+    @InputFile
+    @PathSensitive(PathSensitivity.NONE)
+    Provider<RegularFile> getNewApiFile() {
+        return project.layout.projectDirectory.file(newApi)
+    }
+
+    @InputFile
+    @PathSensitive(PathSensitivity.NONE)
     @Optional
-    final Property<Boolean> testModeEnabled = getProject().getObjects().property(Boolean.class)
+    Provider<RegularFile> getOldApiFile() {
+        return project.layout.projectDirectory.file(oldApi)
+    }
 
     private final OptionsValidator optionsValidator = new OptionsValidator()
 
     @TaskAction
     void performCheck() {
+        def resolvedOutputPath = project.objects.property(String)
+        resolvedOutputPath.set(outputDir.get().asFile.absolutePath)
         def parameter = CheckBreakingChangesTaskParameterFactory.create(
                 getProject(),
                 this.newApi,
@@ -87,7 +115,7 @@ class CheckBreakingChangesTask extends DefaultTask {
                 this.groupId,
                 this.currentVersion,
                 this.artifactPackaging,
-                this.outputFilePath,
+                resolvedOutputPath,
                 this.outputFormats,
                 this.mavenRepoUsername,
                 this.mavenRepoPassword,

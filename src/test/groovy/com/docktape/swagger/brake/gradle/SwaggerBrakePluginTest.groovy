@@ -3,7 +3,6 @@ package com.docktape.swagger.brake.gradle
 
 import org.gradle.api.GradleException
 import org.gradle.testfixtures.ProjectBuilder
-import org.gradle.util.ClosureBackedAction
 import spock.lang.Specification
 
 class SwaggerBrakePluginTest extends Specification {
@@ -50,17 +49,17 @@ class SwaggerBrakePluginTest extends Specification {
 
         when:
         project.pluginManager.apply(SwaggerBrakePlugin)
-        project.extensions.configure(SwaggerBrakeExtension, new ClosureBackedAction<SwaggerBrakeExtension>({
-            mavenRepoUrl = expectedMavenRepoUrl
-            newApi = expectedNewApi
-            groupId = expectedGroupId
-            artifactId = expectedArtifactId
-            outputFilePath = expectedOutputFilePath
-            outputFormats = expectedOutputFormats
-            mavenRepoUsername = expectedMavenRepoUsername
-            mavenRepoPassword = expectedMavenRepoPassword
-            oldApi = expectedOldApi
-        }))
+        project.extensions.configure(SwaggerBrakeExtension, { ext ->
+            ext.mavenRepoUrl = expectedMavenRepoUrl
+            ext.newApi = expectedNewApi
+            ext.groupId = expectedGroupId
+            ext.artifactId = expectedArtifactId
+            ext.outputFilePath = expectedOutputFilePath
+            ext.outputFormats = expectedOutputFormats
+            ext.mavenRepoUsername = expectedMavenRepoUsername
+            ext.mavenRepoPassword = expectedMavenRepoPassword
+            ext.oldApi = expectedOldApi
+        })
 
         then:
         def extension = project.extensions.findByName("swaggerBrake")
@@ -93,15 +92,15 @@ class SwaggerBrakePluginTest extends Specification {
 
         when:
         project.pluginManager.apply(SwaggerBrakePlugin)
-        project.extensions.configure(SwaggerBrakeExtension, new ClosureBackedAction<SwaggerBrakeExtension>({
-            mavenRepoUrl = expectedMavenRepoUrl
-            newApi = expectedNewApi
-            groupId = expectedGroupId
-            artifactId = expectedArtifactId
-            outputFilePath = expectedOutputFilePath
-            outputFormats = expectedOutputFormats
-            oldApi = expectedOldApi
-        }))
+        project.extensions.configure(SwaggerBrakeExtension, { ext ->
+            ext.mavenRepoUrl = expectedMavenRepoUrl
+            ext.newApi = expectedNewApi
+            ext.groupId = expectedGroupId
+            ext.artifactId = expectedArtifactId
+            ext.outputFilePath = expectedOutputFilePath
+            ext.outputFormats = expectedOutputFormats
+            ext.oldApi = expectedOldApi
+        })
 
         then:
         def extension = project.extensions.findByName("swaggerBrake")

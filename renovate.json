@@ -15,6 +15,11 @@
       "description": "Group all Gradle and Gradle wrapper updates",
       "matchManagers": ["gradle", "gradle-wrapper"],
       "groupName": "jvm-dependencies"
+    },
+    {
+      "description": "Pin Spock to groovy-4.x variant to match Gradle's bundled Groovy version",
+      "matchPackageNames": ["org.spockframework:spock-core"],
+      "allowedVersions": "/.*-groovy-4\\..*/"
     }
   ]
 }

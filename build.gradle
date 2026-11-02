@@ -42,7 +42,7 @@ dependencies {
     implementation "com.docktape:swagger-brake:2.7.0"
     implementation "org.apache.commons:commons-collections4:4.6.0"
     implementation "org.apache.commons:commons-lang3:3.21.0"
-    implementation 'com.google.guava:guava:33.7.1-jre'
+    implementation 'com.google.guava:guava:33.7.2-jre'
 
     testImplementation "net.bytebuddy:byte-buddy:1.18.14"
     testImplementation "org.objenesis:objenesis:3.6"
